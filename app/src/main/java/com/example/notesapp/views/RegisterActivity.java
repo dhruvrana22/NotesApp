@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.notesapp.R;
 import com.example.notesapp.helpers.UserDBAdapter;
+import com.example.notesapp.models.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -32,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("username", txtUsername.getText().toString());
                 editor.commit();
+                User.setCurrentUserName(txtUsername.getText().toString());
                 UserDBAdapter adapter = new UserDBAdapter(this);
                 adapter.open();
                 adapter.addUser(txtUsername.getText().toString(), txtPassword.getText().toString());

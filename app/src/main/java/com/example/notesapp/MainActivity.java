@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.notesapp.models.User;
 import com.example.notesapp.views.HomeActivity;
 import com.example.notesapp.views.LoginActivity;
 import com.example.notesapp.views.RegisterActivity;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("LoginUserData", Context.MODE_PRIVATE);
         Log.d("NotesApp", "USERNAME: " + preferences.getString("username", ""));
         if(!Objects.equals(preferences.getString("username", ""), "")) {
+            User.setCurrentUserName(preferences.getString("username", ""));
             Intent loginIntent = new Intent();
             loginIntent.setClass(this, HomeActivity.class);
             startActivity(loginIntent);

@@ -10,12 +10,13 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.notesapp.models.Note;
+import com.example.notesapp.models.User;
 
 import java.util.ArrayList;
 
 public class NoteDBAdapter {
     private static final String dbName = "notesapp";
-    private static final int dbVersion = 4;
+    private static final int dbVersion = 1;
     private final NoteDBHelper noteDBHelper;
     public static String tableName = "Notes";
     private SQLiteDatabase db;
@@ -41,7 +42,9 @@ public class NoteDBAdapter {
 
     public ArrayList<Note> getNotes() {
         try {
-            Cursor cursor = db.query(tableName, new String[]{"id", "title", "content", "username"}, null, null, null, null, null);
+            Log.d("NotesApp", "getNotes: " + User.getCurrentUserName());
+//            Cursor cursor = db.query(tableName, new String[]{"id", "title", "content", "username"}, null, null, null, null, null);
+            Cursor cursor = db.rawQuery("SELECT id, title, content, username FROM " + tableName + " WHERE username=?;", new String[]{User.getCurrentUserName()});
             ArrayList<Note> notes = new ArrayList<Note>();
             int i = 0;
             while (cursor.moveToNext()) {
@@ -88,6 +91,7 @@ public class NoteDBAdapter {
         cv.put("title", note.getTitle());
         cv.put("content", note.getContent());
         cv.put("username", note.getUserName());
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + tableName + " ( id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, content TEXT NOT NULL , username TEXT NOT NULL);");
         return db.insert(tableName, null, cv);
     }
 

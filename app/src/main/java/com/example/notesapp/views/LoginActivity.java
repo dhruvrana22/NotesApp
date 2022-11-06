@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.notesapp.R;
 import com.example.notesapp.helpers.UserDBAdapter;
+import com.example.notesapp.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("username", txtUsername.getText().toString());
                 editor.commit();
+                User.setCurrentUserName(txtUsername.getText().toString());
                 Toast.makeText(this, "Successfully logged in as " + txtUsername.getText().toString(), Toast.LENGTH_SHORT).show();
                 Intent loginIntent = new Intent();
                 loginIntent.setClass(this, HomeActivity.class);

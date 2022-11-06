@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 public class UserDBAdapter {
     private static final String dbName = "notesapp";
-    private static final int dbVersion = 4;
+    private static final int dbVersion = 1;
     private static final String tableName = "User";
     private UserDBHelper userDbHelper;
     private SQLiteDatabase db;

@@ -37,7 +37,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 
         title.setText(note.getTitle());
         content.setText(note.getContent());
-        user.setText(String.format("By %s", note.getUserName()));
+//        user.setText(String.format("%s", note.getUserName()));
 
         return convertView;
     }
